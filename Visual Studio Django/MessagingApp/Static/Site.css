@@ -1,0 +1,29 @@
+body
+{
+    
+}
+
+.hide-div {
+    animation: fadeout linear 1s;
+    opacity: 0;
+}
+
+@keyframes fadeout {
+    from {opacity:1; display:block;}
+    to {opacity:0; display:none;}
+}
+
+.hidden-div {
+    display:none;
+}
+
+.hidden-div.show {
+    animation: fadeup linear 2s;
+    display: block;
+}
+
+@keyframes fadeup {
+    from { opacity:0;}
+    to {opacity:1;}
+}
+

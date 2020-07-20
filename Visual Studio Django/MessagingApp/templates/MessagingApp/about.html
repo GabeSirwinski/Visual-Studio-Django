@@ -1,0 +1,95 @@
+﻿{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card col-10 mx-auto my-5 hidden-div">
+  <div class="card-body text-center">
+    <h1 class="card-title text-center">MessagingApp</h1>
+    <h4 class="card-subtitle mb-2 text-muted text-center">The greatest app ever</h4><br />
+    <p class="card-text">Here is some important information about the messaging app:</p><br />
+      <p>This app was created by Gabe Sirwinski.</p><br />
+      <p>This is the about page for the app.</p><br />
+      <h3>Let's get to messaging!!!</h3><br />
+    <button class="btn btn-primary"href="#">Start Messaging</button>
+    <button href="#" class="btn btn-primary">More Info</button>
+  </div>
+</div>
+
+<div id="introDiv">
+<div style="height:300px;"class="col-6 mt-5 mx-auto border border-black">
+    <p id="timestamp"style="display:none;"class="text-center">--5:59pm--</p>
+    <button id="text1" style="display:none;"class="float-right btn mx-5 btn-primary">Hey, wanna chat for a bit?</button><br /><br /><br />
+    <button id="text2" style="display:none;"class="float-left btn mx-5">Yeah, sure that sounds great.</button><br /><br /><br />
+    <button id="text3"style="display:none;"class="float-right btn mx-5 btn-primary">Let's use MessagingApp</button>
+</div>
+
+  <div class="d-flex flex-row justify-content-center">
+    <div class="p-2 col-4 text-center">
+      <input type="text" class="form-control text-center" id="textmessagebox" placeholder="Message">
+    </div>
+    <div class="p-2">
+      <button class="btn btn-primary float-left" id="thebutton">Send</button>
+    </div>
+    <div><h1 class="testDiv"></h1></div>
+  </div>
+</div>
+
+{% endblock %}
+{% block js %}
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
+
+<script>
+    $(document).ready(function () {
+        setTimeout(function () { typedStuff('#textmessagebox', "Hey, wanna chat for a bit?"); }, 01);
+        setTimeout(function () { $("#thebutton").removeClass("btn-primary"); }, 2700);
+        setTimeout(function () { $("#thebutton").addClass("btn-primary"); }, 2900);
+        setTimeout(function () {
+            $('#textmessagebox').val("");
+            $('#text1').css('display', 'block');
+            $('#timestamp').css('display', 'block');
+        }, 3000);
+        setTimeout(function () { $("#text2").css("display", "block"); }, 3600);
+        setTimeout(function () {
+            typedStuffAgain('#textmessagebox', "Let's use MessagingApp");
+        }, 5000);
+        setTimeout(function () { $("#thebutton").removeClass("btn-primary"); }, 7200);
+        setTimeout(function () { $("#thebutton").addClass("btn-primary"); }, 7400);
+        setTimeout(function () {
+            $('#textmessagebox').attr("placeholder", "Message").val("");
+            $('#text3').css('display', 'block');
+        }, 7700);
+        setTimeout(function () { $("#introDiv").addClass("hide-div"); }, 8000);
+        setTimeout(function () { $("#introDiv").css("display","none"); }, 9000);
+        setTimeout(function () { $(".hidden-div").addClass("show"); }, 9000);
+    })
+
+    function typedStuff(location,string) {
+            new Typed(location, {
+            strings: ['', string],
+            typeSpeed: 50,
+            backSpeed: 0,
+            attr: 'value',
+            bindInputFocusEvents: false,
+            loop: false,
+            onDestroy: function (self) { prettyLog('onDestroy ' + self) }
+            });
+    }
+
+    function typedStuffAgain(location,string) {
+            new Typed(location, {
+            strings: ['', string],
+            typeSpeed: 50,
+            backSpeed: 0,
+            attr: 'placeholder',
+            bindInputFocusEvents: false,
+            loop: false,
+            onDestroy: function (self) { prettyLog('onDestroy ' + self) }
+            });
+    }
+    
+    
+</script>
+
+
+{% endblock %}
