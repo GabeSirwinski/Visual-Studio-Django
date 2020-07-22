@@ -47,12 +47,17 @@
     <Compile Include="Visual_Studio_Django\wsgi.py" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="MessagingApp\Static\jquery-3.2.1.min.js" />
     <Content Include="MessagingApp\Static\typed.js" />
     <Content Include="MessagingApp\Static\typed.min.js" />
     <Content Include="MessagingApp\Static\typed.min.js.map" />
     <Content Include="MessagingApp\templates\MessagingApp\about.html" />
+    <Content Include="MessagingApp\templates\MessagingApp\inboxDetails.html" />
     <Content Include="MessagingApp\templates\MessagingApp\index.html" />
-    <Content Include="MessagingApp\templates\registration\profile.html" />
+    <Content Include="MessagingApp\templates\MessagingApp\inbox.html" />
+    <Content Include="MessagingApp\templates\MessagingApp\new.html" />
+    <Content Include="MessagingApp\templates\MessagingApp\restricted.html" />
+    <Content Include="MessagingApp\templates\registration\logged_out.html" />
     <Content Include="requirements.txt" />
     <Content Include="MessagingApp\Static\Site.css" />
     <Content Include="Templates\base.html" />
