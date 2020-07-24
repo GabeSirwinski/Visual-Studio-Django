@@ -1,16 +1,27 @@
 ﻿{% extends 'base.html' %}
 
 {% block content %}
-        <table class="table table-responsive-sm mx-auto table-hover">
+<br /><br />
+        <table class="table table-responsive-sm col-8 mx-auto text-center table-hover">
             <thead class="thead-dark">
                 <tr>
-                    <th scope="col">From</th>
+                    <th scope="col">UserName</th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
-                {% for message in chatnames %}
-                <tr class="clickable-row" data-href="/{{message}}/inboxDetails">
-                    <td>{{ message }}</td>    
+                <tr>
+                    <a id="newButton" href="/{{pk}}/new" role="button" class="btn mr-5 mb-2 btn-success text-center ml-4">New Chat</a>
+                </tr>
+                {% for chat in chatnames %}
+                <tr class="clickable-row" data-href="/{{chat}}/inboxDetails">
+                    <td>
+                        {{ chat }}
+                    </td>   
+                    <td>
+                        <a id="viewButton" href="/{{pk}}/inbox/{{chat}}/inboxDetails" role="button" class="btn mb-2 btn-secondary text-center ml-4">View Chat</a>
+                        <a id="deleteButton" href="/{{pk}}/inbox/{{chat}}/delete" role="button" class="btn mb-2 btn-danger text-center ml-4">Delete Chat</a>
+                    </td>   
                 </tr>
                 {% endfor %}
             </tbody>

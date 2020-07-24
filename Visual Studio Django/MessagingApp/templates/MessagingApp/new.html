@@ -5,17 +5,20 @@
 <div class="col-6 mx-auto border border-primary m-5">
         <h4 class="text-bold text-center mt-3">Start a new chat</h4>
         <p class="text-center mb-3">Who would you like to chat with?</p>
+<form method="post">
+    {% csrf_token %}
      <div class="mx-4">
             <input type="text" name="userName" id="userName"class="form-control" placeholder="Enter UserName">
         </div>
         <div class="mx-4">
             {% if errors %}
-            <p class="text-center text-danger">UserName or Password not found. Please try again.</p>
+            <p class="text-center text-danger">{{errors}}</p>
             {% endif %}
         </div>
         <div class="text-right m-4">
-            <a id="startChat" href=""class="btn mb-5 btn-primary text-right ml-4">Start Chat</a>
+            <button type="submit" id="startChat" class="btn mb-5 btn-primary text-right ml-4">Start Chat</button>
         </div>
+</form>
 </div> 
 
 
@@ -23,9 +26,8 @@
 
 {% block js %}
 <script>
-    $('#startChat').on('click', function () {
-        var newChat = $('#userName').val();
-        $('#startchat').attr('href','{{userId}}/inbox/' + newChat + '/inboxDetails');
-    });
+
 </script>
 {% endblock %}
+
+

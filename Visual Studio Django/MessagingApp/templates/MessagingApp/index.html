@@ -2,6 +2,107 @@
 
 {% block content %}
 
-Here is some from Index.html
+        {% if user.id == None %}
 
+        <div class="site-wrapper bg-light text-center">
+
+      <div class="site-wrapper-inner">
+
+        <div class="container">
+          <div id="homeCover" class="inner cover col-10 mx-auto hidden-div">
+            <h1 class="cover-heading">MessagingApp</h1>
+            <div class="border border-primary p-5">
+              <h3><span id="line1" style="display:none;"class="badge pill-badge float-left badge-secondary hidden-div">100% free to use - Always.</span></h3><br /><br />
+              <h3><span id="line2"style="display:none;"class="badge pill-badge float-right badge-primary hidden-div">Convenient & Easy.</span></h3><br /><br />
+              <h3><span id="line3"style="display:none;"class="badge pill-badge float-left badge-secondary hidden-div">Safe and Secure.</span></h3><br /><br />
+                <h3><span id="line4"style="display:none;"class="badge pill-badge float-right badge-primary hidden-div">Your information will never be shared.</span></h3><br /><br />
+              <h3><span id="line5"style="display:none;"class="badge pill-badge float-right badge-primary hidden-div">Ever.</span></h3><br /><br />
+               <p class="lead"> </p>
+             </div>
+           
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+<div class="site-wrapper bg-light text-center">
+
+      <div class="site-wrapper-inner">
+
+        <div class="container">
+          <div class="inner cover">
+            <h1 class="cover-heading">Get started with MessagingApp</h1>
+            <p class="lead">Let's get started!</p>
+            <p class="lead">
+              <a href="/signup" role="button" class="btn btn-primary btn-default">Sign Up</a>
+            </p>
+              <a href="/accounts/login" class="text-small">Already have an account?</a>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    {% endif %}
+
+    {% if user.id != None %}
+
+    <div class="site-wrapper bg-light text-center">
+
+      <div class="site-wrapper-inner">
+
+        <div class="container">
+          <div class="inner cover">
+            <h1 class="cover-heading">Welcome back, {{user.username}}!</h1>
+            <p class="lead">We're happy to have you. Let's get messaging!</p>
+            <p class="lead">
+              <a href="/{{user.id}}/inbox" role="button" class="btn btn-primary btn-default">Start Messaging</a>
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+{% endif %}
+        
+{% endblock %}
+
+{% block js %}
+<script>
+    $(document).ready(function () {
+        $('#homeCover').addClass('show');
+        $(document).scrollTop(0);
+        setTimeout(function () {
+             $('#line1').css('display', 'block');
+            $('#line1').addClass('show');
+        }, 1500);
+        setTimeout(function () {
+            $('#line2').css('display', 'block');
+            $('#line2').addClass('show');
+        }, 3000);
+        setTimeout(function () {
+            $('#line3').css('display', 'block');
+            $('#line3').addClass('show');
+        }, 4500);
+        setTimeout(function () {
+            $('#line4').css('display', 'block');
+            $('#line4').addClass('show');
+        }, 6000);
+        setTimeout(function () {
+            $('#line5').css('display', 'block');
+            $('#line5').addClass('show');
+        }, 8000);
+        setTimeout(function () {
+            $('html, body').animate({ scrollTop: document.body.scrollHeight }, "slow");
+        }, 10000);
+    });
+</script>
 {% endblock %}

@@ -1,0 +1,17 @@
+﻿{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="col-6 mx-auto border border-primary m-5">
+        <h4 class="text-bold text-center mt-3">Delete Chat</h4>
+        <p class="text-center mb-3">Are you sure you want to delete the chat with {{chatname}}?</p>
+<form method="post">
+    {% csrf_token %}
+        <div class="text-right m-4">
+            <button type="submit" id="startChat" class="btn mb-5 btn-danger text-right ml-4">Delete Chat</button>
+        </div>
+</form>
+</div> 
+
+
+{% endblock %}

@@ -8,5 +8,4 @@ class Message(models.Model):
     senderId = models.ForeignKey(User, on_delete=models.CASCADE, related_name="sender")
     recipientId = models.ForeignKey(User, on_delete=models.CASCADE, related_name="recipient")
     dateTime = models.DateTimeField()
-    read = models.BooleanField(default=False)
     body = models.CharField(max_length=300, default="", blank=True, null=False)

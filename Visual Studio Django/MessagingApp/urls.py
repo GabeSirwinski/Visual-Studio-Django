@@ -11,9 +11,9 @@ urlpatterns = [
     path('about', views.about, name="about"),
     path('signup', views.signup, name='signup'),
     path('<int:pk>/inbox', views.inbox, name='inbox'),
-    path('<int:pk>/new', views.new, name='new'),
+    path('<int:upk>/new', views.new, name='new'),
     path('accounts/logout', views.logout_view, name="logout"),
     path('<int:upk>/inbox/<str:name>/inboxDetails', views.inboxDetails, name='inboxDetails'),
+    path('<int:upk>/inbox/<str:name>/delete', views.delete, name='delete'),
     path('restricted', views.restricted, name="restricted"),
-    path('createNewMessage', views.createNewMessage, name="createNewMessage"),
 ]

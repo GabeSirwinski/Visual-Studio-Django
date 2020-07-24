@@ -52,6 +52,7 @@
     <Content Include="MessagingApp\Static\typed.min.js" />
     <Content Include="MessagingApp\Static\typed.min.js.map" />
     <Content Include="MessagingApp\templates\MessagingApp\about.html" />
+    <Content Include="MessagingApp\templates\MessagingApp\delete.html" />
     <Content Include="MessagingApp\templates\MessagingApp\inboxDetails.html" />
     <Content Include="MessagingApp\templates\MessagingApp\index.html" />
     <Content Include="MessagingApp\templates\MessagingApp\inbox.html" />

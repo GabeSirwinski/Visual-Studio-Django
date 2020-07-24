@@ -26,10 +26,11 @@
         <div class="text-center mr-4">
             <input type="text" value="{{ currentuser }}" name="senderId" class="form-control m-3" hidden>
             <input type="text" value="{{ chatname }}"name="recipientId" class="form-control m-3" hidden>
-            <input type="text" id="message" name="message" class="form-control m-3" placeholder="Reply">
-            <button type="submit" id="replyButton" class="btn mb-2 btn-primary text-right ml-4">Reply</button>
+            <input type="text" id="message" name="message" class="form-control m-3 mx-auto col-10" placeholder="Message">
+            <button type="submit" href="/{{currentuser.id}}/inbox/{{chatname}}/inboxDetails" id="replyButton" class="btn mb-2 btn-primary text-right ml-4">Send message to {{chatname}}</button>
     
-             <a id="refreshButton" href="/{{currentuser.id}}/inbox/{{chatname}}/inboxDetails" role="button" class="btn mb-2 btn-secondary text-right ml-4">Refresh</a>
+             <a id="refreshButton" href="/{{currentuser.id}}/inbox/{{chatname}}/inboxDetails" role="button" class="btn mb-2 btn-secondary text-right ml-4">Refresh Chat</a>
+            <a id="deleteButton" href="/{{currentuser.id}}/inbox/{{chatname}}/delete" role="button" class="btn mb-2 btn-danger text-right ml-4">Delete Chat</a>
     
             
         </div>

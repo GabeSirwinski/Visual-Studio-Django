@@ -39,15 +39,31 @@ def inbox(request, pk):
             if i.recipientId not in chatnames:
                 chatnames.append(i.recipientId)
             chatnames.remove(request.user)
-        return render(request, 'MessagingApp/inbox.html', {'chatnames':chatnames})
+        return render(request, 'MessagingApp/inbox.html', {'chatnames':chatnames,'pk':str(pk)})
     else:
         return redirect('restricted')
 
-def new(request, pk):
-    pk = int(pk)
-    chatnames = []
-    if request.user.id == pk:
-       return render(request, 'MessagingApp/new.html',{'userId':pk})
+def new(request, upk):
+    upk = int(upk)
+    if request.method == 'POST':
+        try:
+            sender = User.objects.get(username = request.POST.get('userName'))
+            recipient = User.objects.get(id = upk)
+            message = Message()
+            message.senderId = sender
+            message.recipientId = recipient
+            message.dateTime = datetime.now()
+            message.body = str(recipient.username + ' started a chat with ' + sender.username)
+            message.save()
+            return redirect('/' + str(upk) + '/inbox/' + sender.username + '/inboxDetails' ) 
+        except:
+            errors = "The username you are looking for does not exist."
+            return render(request, 'MessagingApp/new.html',{'userId':upk, 'errors':errors})
+
+    
+    
+    if request.user.id == upk:
+       return render(request, 'MessagingApp/new.html',{'userId':upk})
     else:
         return redirect('restricted')
 
@@ -76,24 +92,27 @@ def inboxDetails(request, upk, name):
     if request.user.id == upk:
         messages = Message.objects.filter(Q(recipientId=currentuser, senderId=chatname) | Q(recipientId=chatname, senderId=currentuser)).order_by('dateTime') 
         readMessages = messages.select_for_update().filter(senderId=currentuser)
-        for message in readMessages:
-            message.read = True
-            message.save()
         return render(request, 'MessagingApp/inboxDetails.html', {'messages':messages, 'currentuser':currentuser, 'chatname': chatname})
     else:
         return redirect('restricted')
 
+def delete(request, upk, name):
+    if request.method == 'POST':    
+        name = str(name)
+        chatname = User.objects.get(username=name)
+        upk = int(upk)
+        currentuser = request.user
+        if request.user.id == upk:
+            messages = Message.objects.filter(Q(recipientId=currentuser, senderId=chatname) | Q(recipientId=chatname, senderId=currentuser)).delete() 
+            return redirect('/' + str(upk) + '/inbox')
+        else:
+            return redirect('restricted')
+    if request.user.id == upk:
+        chatname = User.objects.get(username=name)
+        return render(request,'MessagingApp/delete.html',{'chatname':chatname})
+    else:
+        return redirect('restricted')
 
-
-def createNewMessage(request):
-    if request.method == 'POST':
-        if request.POST.get('senderId') and request.POST.get('recipientId') and request.POST.get('message'):
-            message = Message()
-            message.senderId = request.POST.get('senderId')
-            message.recipientId = request.POST.get('recipientId')
-            message.dateTime = datetime.now()
-            message.message = request.POST.get('message')
-            message.save()
 
 def restricted(request):
     return render(request,'MessagingApp/restricted.html')
