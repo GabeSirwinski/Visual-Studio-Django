@@ -6,6 +6,11 @@ from django.db.models import Q
 from django.contrib.auth.models import User
 from datetime import datetime
 from django.http import HttpResponse
+from django.http.response import JsonResponse
+from django.core import serializers
+
+
+
 
 # Create your views here.
 
@@ -93,6 +98,18 @@ def inboxDetails(request, upk, name):
         messages = Message.objects.filter(Q(recipientId=currentuser, senderId=chatname) | Q(recipientId=chatname, senderId=currentuser)).order_by('dateTime') 
         readMessages = messages.select_for_update().filter(senderId=currentuser)
         return render(request, 'MessagingApp/inboxDetails.html', {'messages':messages, 'currentuser':currentuser, 'chatname': chatname})
+    else:
+        return redirect('restricted')
+
+def getMessages(request, upk, name):
+    name = str(name)
+    chatname = User.objects.get(username=name)
+    upk = int(upk)
+    currentuser = request.user
+    if request.user.id == upk:
+        messages = list(Message.objects.filter(Q(recipientId=currentuser, senderId=chatname) | Q(recipientId=chatname, senderId=currentuser)).order_by('dateTime'))
+        data = serializers.serialize('json', messages)
+        return HttpResponse(data, content_type="application/json")
     else:
         return redirect('restricted')
 

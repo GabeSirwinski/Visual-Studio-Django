@@ -16,4 +16,5 @@ urlpatterns = [
     path('<int:upk>/inbox/<str:name>/inboxDetails', views.inboxDetails, name='inboxDetails'),
     path('<int:upk>/inbox/<str:name>/delete', views.delete, name='delete'),
     path('restricted', views.restricted, name="restricted"),
+    path('<int:upk>/<str:name>/getMessages', views.getMessages, name='getMessages'),
 ]

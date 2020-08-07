@@ -4,37 +4,29 @@
 {% block content %}
 
     <div id="messageBoard">
-    <form name="messageBoard" class="col-10 mx-auto border border-primary m-5">
-        <h4 class="text-bold text-center mt-3">Chat with {{ chatname }}</h4>
-        {% for message in messages %}
-        {% if message.recipientId == currentuser %}
-        <div class="form-group mx-4 text-right">
-            <h5><span class="badge pill-badge badge-primary">{{message.body}}</span></h5>
-            <small>{{message.recipientId}}, {{message.dateTime}}</small>
+    <form name="messageBoard" class="col-lg-6 col-md-8 col-sm-12 mx-auto border border-primary m-5">
+        <h4 class="text-bold text-center mt-3 sticky sticky-top text-underline">Chat with {{ chatname }}</h4>
+        <div id="AJAX_chat">
+        
         </div>
-        {% else %}
-        <div class="form-group mx-4">
-            <h5><span class="badge pill-badge badge-secondary">{{message.body}}</span></h5>
-            <small>{{message.recipientId}}, {{message.dateTime}}</small>
-        </div>
-        {% endif %}
-        {% endfor %}
     </form>
-    </div>
-    <form method="post" class="col-10 mx-auto border border-primary p-3 m-5">
+    </div><div class="my-5"><br /><br /><br /><br /></div>
+    <form method="post" class="col-lg-6 col-md-8 col-sm-12 mx-auto border border-primary p-3 m-5 fixed-bottom bg-light">
         {% csrf_token %}
         <div class="text-center mr-4">
             <input type="text" value="{{ currentuser }}" name="senderId" class="form-control m-3" hidden>
             <input type="text" value="{{ chatname }}"name="recipientId" class="form-control m-3" hidden>
             <input type="text" id="message" name="message" class="form-control m-3 mx-auto col-10" placeholder="Message">
             <button type="submit" href="/{{currentuser.id}}/inbox/{{chatname}}/inboxDetails" id="replyButton" class="btn mb-2 btn-primary text-right ml-4">Send message to {{chatname}}</button>
-    
-             <a id="refreshButton" href="/{{currentuser.id}}/inbox/{{chatname}}/inboxDetails" role="button" class="btn mb-2 btn-secondary text-right ml-4">Refresh Chat</a>
             <a id="deleteButton" href="/{{currentuser.id}}/inbox/{{chatname}}/delete" role="button" class="btn mb-2 btn-danger text-right ml-4">Delete Chat</a>
     
             
         </div>
     </form>
+    <div id="bottom"></div>
+
+    
+    
 
 
         
@@ -44,12 +36,38 @@
 <script>
 
     $(document).ready(function(){
-        $(document).scrollTop($(document).height());
+        fetchData();
+        setTimeout(function () {
+            window.scrollTo(0,document.body.scrollHeight);
+        }, 150);
+     
+        
+        
     });
 
-    //$('#refreshButton').on('click', function () {
-    //    location.reload();
-    //});
+    setInterval(fetchData, 1000);
+    async function fetchData() {
+        const response = await fetch('/{{currentuser.id}}/{{chatname}}/getMessages');
+        var data = await response.json();
+        var sender = {{currentuser.id}};
+        var chatBox = '';
+        data.forEach(obj => {
+            Object.entries(obj.fields).forEach(([key, value]) => {
+                if (`${key}` == 'senderId' && `${value}` == sender) {
+                    chatBox += '<br><div class="form-group mx-4"><h5><span class="badge pill-badge badge-secondary">';
+                }
+                if (`${key}` == 'recipientId' && `${value}` == sender) {
+                    chatBox += '<br><div class="form-group mx-4 text-right"><h5><span class="badge pill-badge badge-primary">';
+                }
+                if (`${key}` == 'body') {
+                    chatBox += `${value}` + '</span></h5></div>';
+                }
+            });
+            console.log('-------------------');
+        });
+        $('#AJAX_chat').html(chatBox);
+        window.scrollTo(0,document.body.scrollHeight);
+    }
         
 </script>
 {% endblock %}
