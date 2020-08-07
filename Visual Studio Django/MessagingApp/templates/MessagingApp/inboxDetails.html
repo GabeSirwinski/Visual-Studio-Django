@@ -10,8 +10,8 @@
         
         </div>
     </form>
-    </div><div class="my-5"><br /><br /><br /><br /></div>
-    <form method="post" class="col-lg-6 col-md-8 col-sm-12 mx-auto border border-primary p-3 m-5 fixed-bottom bg-light">
+    </div><div class="my-5"><br /><br /><br /><br /><br /></div>
+    <form method="post" autocomplete="off" class="col-lg-6 col-md-8 col-sm-12 mx-auto border border-primary p-3 m-5 fixed-bottom bg-light">
         {% csrf_token %}
         <div class="text-center mr-4">
             <input type="text" value="{{ currentuser }}" name="senderId" class="form-control m-3" hidden>
