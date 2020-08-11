@@ -13,13 +13,13 @@ I also got to use Django's built in user authentication for the first time.
 Click the video below to see a demonstration of the home page, about page, and logging in and out.
 
 
-[![Watch the video](http://img.youtube.com/vi/x4TFMZG6kWQ/hqdefault.jpg)](https://www.youtube.com/x4TFMZG6kWQ) 
+[![Watch the video](http://img.youtube.com/vi/x4TFMZG6kWQ/hqdefault.jpg)](https://www.youtube.com/watch?v=x4TFMZG6kWQ) 
 
 
 Click the video below to see a demonstration of the async messaging part of the site.
 
 
-[![Watch the video](http://img.youtube.com/vi/Q8Jl4VbrbD4/hqdefault.jpg)](https://www.youtube.com/Q8Jl4VbrbD4)
+[![Watch the video](http://img.youtube.com/vi/Q8Jl4VbrbD4/hqdefault.jpg)](https://www.youtube.com/watch?v=Q8Jl4VbrbD4)
 
 
 Feel free to look through the code and ask any questions you may have. 
