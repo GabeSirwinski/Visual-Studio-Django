@@ -1,4 +1,5 @@
-# Visual-Studio-Django
+# Visual Studio Django
+
 This was my first project using Django in Visual Studio. 
 
 Previously, I had only used PyCharm and was very happy with my experience.
